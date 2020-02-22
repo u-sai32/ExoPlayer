@@ -18,6 +18,7 @@ import com.google.android.exoplayer2.trackselection.*;
 import com.google.android.exoplayer2.ui.*;
 import com.google.android.exoplayer2.upstream.*;
 import com.google.android.exoplayer2.util.*;
+import com.google.android.exoplayer2.video.*;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class SampleExoPlayer {
@@ -27,7 +28,8 @@ public class SampleExoPlayer {
 
     private ExoPlayer exoPlayer;
     private Surface surface;
-    private MediaCodecVideoTrackRenderer videoRenderer;
+    //private MediaCodecVideoTrackRenderer videoRenderer;
+    private MediaCodecVideoRenderer videoRenderer;
 
     public SampleExoPlayer() {
     }
@@ -38,13 +40,13 @@ public class SampleExoPlayer {
         DataSource dataSource = new DefaultUriDataSource(context, "userAgent");
         SampleSource sampleSource = new ExtractorSampleSource(
                 Uri.parse(url), dataSource, allocator, BUFFER_SEGMENT_COUNT * BUFFER_SEGMENT_SIZE);
-        videoRenderer = new MediaCodecVideoTrackRenderer(context, sampleSource, MediaCodecSelector.DEFAULT,
+        videoRenderer = new MediaCodecVideoRenderer(context, sampleSource, MediaCodecSelector.DEFAULT,
                 MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, 5000, new Handler(), videoSizeChangedListener, 50);
-        TrackRenderer audioRenderer = new MediaCodecAudioTrackRenderer(sampleSource, MediaCodecSelector.DEFAULT);
+        TrackRenderer audioRenderer = new MediaCodecAudioRenderer(sampleSource, MediaCodecSelector.DEFAULT);
         TrackRenderer[] rendererArray = {videoRenderer, audioRenderer};
         exoPlayer = ExoPlayer.Factory.newInstance(rendererArray.length);
         exoPlayer.prepare(rendererArray);
-        exoPlayer.sendMessage(videoRenderer, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, surface);
+        exoPlayer.sendMessage(videoRenderer, MediaCodecVideoRenderer.MSG_SET_SURFACE, surface);
         exoPlayer.setPlayWhenReady(true);
     }
 
@@ -62,17 +64,17 @@ public class SampleExoPlayer {
 
     public void surfaceCreated() {
         if (exoPlayer != null) {
-            exoPlayer.sendMessage(videoRenderer, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, surface);
+            exoPlayer.sendMessage(videoRenderer, MediaCodecVideoRenderer.MSG_SET_SURFACE, surface);
         }
     }
 
     public void surfaceDestroyed() {
         if (exoPlayer != null) {
-            exoPlayer.blockingSendMessage(videoRenderer, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, surface);
+            exoPlayer.blockingSendMessage(videoRenderer, MediaCodecVideoRenderer.MSG_SET_SURFACE, surface);
         }
     }
 
-    public static abstract class VideoSizeChangedListener implements MediaCodecVideoTrackRenderer.EventListener {
+    public static abstract class VideoSizeChangedListener implements MediaCodecVideoRenderer.EventListener {
 
         public abstract void onVideoSizeChanged(int width, int height, float pixelWidthHeightRatio);
 
@@ -92,7 +94,7 @@ public class SampleExoPlayer {
         }
 
         @Override
-        public void onDecoderInitializationError(MediaCodecTrackRenderer.DecoderInitializationException e) {
+        public void onDecoderInitializationError(MediaCodecRenderer.DecoderInitializationException e) {
 
         }
 

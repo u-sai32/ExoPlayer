@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.github.ogapants.playercontrolview.PlayerControlView;
 import com.google.android.exoplayer2.*;
+import com.google.android.exoplayer2.ui.*;
 import com.google.android.exoplayer2.util.*;
 
 import com.google.appinventor.components.annotations.*;
@@ -33,7 +34,8 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     private PlayerControlView playerControlView;
     private SurfaceView surfaceView;
     private AspectRatioFrameLayout videoFrame;
-    private SampleExoPlayer sampleExoPlayer;
+    //private SampleExoPlayer sampleExoPlayer;
+    private SimpleExoPlayer exoPlayer;
     private int timeout;
 
     public CustomExoPlayer(ComponentContainer container) {
@@ -50,7 +52,8 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
         surfaceView.getHolder().addCallback(this.activity);
         playerControlView = new PlayerControlView(this.activity);
         playerControlView.attach(this.activity);
-        sampleExoPlayer = new SampleExoPlayer();
+        //sampleExoPlayer = new SampleExoPlayer();
+        exoPlayer = new SimpleExoPlayer();
     }
     
 
@@ -76,17 +79,19 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     
     @SimpleFunction
     public void Stop(){
-      sampleExoPlayer.stop();
+      //sampleExoPlayer.stop();
+        exoPlayer.stop();
     }
     
     @SimpleFunction
     public void Start(String URL){
-      sampleExoPlayer.start(this.activity, URL, surfaceView.getHolder().getSurface(), new SampleExoPlayer.VideoSizeChangedListener() {
+      //sampleExoPlayer.start(this.activity, URL, surfaceView.getHolder().getSurface(), new SampleExoPlayer.VideoSizeChangedListener() {
+        exoPlayer.start(this.activity, URL, surfaceView.getHolder().getSurface(), new SimpleExoPlayer.VideoSizeChangedListener() {
             public void onVideoSizeChanged(int width, int height, float pixelWidthHeightRatio) {
                 videoFrame.setAspectRatio(height == 0 ? 1 : (width * pixelWidthHeightRatio) / height);
             }
         });
-        playerControlView.setPlayer(new PlayerControl(sampleExoPlayer.getExoPlayer()));
+        playerControlView.setPlayer(new PlayerControl(exoPlayer.getExoPlayer()));
     }
     
     @SimpleFunction

@@ -42,6 +42,7 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     private SurfaceView surfaceView;
     private AspectRatioFrameLayout videoFrame;
     private SampleExoPlayer sampleExoPlayer;
+    private int timeout;
 
     public CustomExoPlayer(ComponentContainer container) {
         super(container.$form());
@@ -78,7 +79,7 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     
     @SimpleFunction
     public boolean isShowingPlayerControl(){
-      return playerControlView.isShowing()
+      return playerControlView.isShowing();
     }
     
     @SimpleFunction
@@ -97,8 +98,14 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     }
     
     @SimpleFunction
-    public void Stop(){
-      sampleExoPlayer.stop();
+    public void show(int timeout) {
+        playerControlView.show(timeout);
     }
+  
+    /*
+    public void setEnabled(boolean enabled) {
+        playerControlView.setEnabled(enabled);
+    }
+    */
   
 }

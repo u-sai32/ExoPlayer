@@ -34,8 +34,7 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     private PlayerControlView playerControlView;
     private SurfaceView surfaceView;
     private AspectRatioFrameLayout videoFrame;
-    //private SampleExoPlayer sampleExoPlayer;
-    private SimpleExoPlayer exoPlayer;
+    private SampleExoPlayer sampleExoPlayer;
     private int timeout;
 
     public CustomExoPlayer(ComponentContainer container) {
@@ -52,8 +51,7 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
         surfaceView.getHolder().addCallback(this.activity);
         playerControlView = new PlayerControlView(this.activity);
         playerControlView.attach(this.activity);
-        //sampleExoPlayer = new SampleExoPlayer();
-        exoPlayer = new SimpleExoPlayer();
+        sampleExoPlayer = new SampleExoPlayer();
     }
     
 
@@ -79,27 +77,25 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     
     @SimpleFunction
     public void Stop(){
-      //sampleExoPlayer.stop();
-        exoPlayer.stop();
+      sampleExoPlayer.stop();
     }
     
     @SimpleFunction
     public void Start(String URL){
-      //sampleExoPlayer.start(this.activity, URL, surfaceView.getHolder().getSurface(), new SampleExoPlayer.VideoSizeChangedListener() {
-        exoPlayer.start(this.activity, URL, surfaceView.getHolder().getSurface(), new SimpleExoPlayer.VideoSizeChangedListener() {
-            public void onVideoSizeChanged(int width, int height, float pixelWidthHeightRatio) {
+      sampleExoPlayer.start(this.activity, URL, surfaceView.getHolder().getSurface(), new SampleExoPlayer.VideoSizeChangedListener() {
+        public void onVideoSizeChanged(int width, int height, float pixelWidthHeightRatio) {
                 videoFrame.setAspectRatio(height == 0 ? 1 : (width * pixelWidthHeightRatio) / height);
             }
         });
         playerControlView.setPlayer(new PlayerControl(exoPlayer.getExoPlayer()));
     }
     
+    /*
     @SimpleFunction
     public void show(int timeout) {
         playerControlView.show(timeout);
     }
   
-    /*
     public void setEnabled(boolean enabled) {
         playerControlView.setEnabled(enabled);
     }

@@ -74,7 +74,7 @@ public class SampleExoPlayer {
         }
     }
 
-    public static abstract class VideoSizeChangedListener implements MediaCodecVideoRenderer.EventListener {
+    public static abstract class VideoSizeChangedListener implements VideoRendererEventListener {
 
         public abstract void onVideoSizeChanged(int width, int height, float pixelWidthHeightRatio);
 

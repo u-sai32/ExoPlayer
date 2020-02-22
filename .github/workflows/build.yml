@@ -1,0 +1,19 @@
+on: push
+name: Build AI-Extension
+jobs:
+  buildAIX:
+    name: Build AIX
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@master
+    - name: Build AIX
+      id: build_aix
+      uses: welut/aix@master
+      with:
+          source: 'https://github.com/welut/appinventor-extensions.git'
+    - name: Upload Artifact
+      id: upload-artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ steps.build_aix.outputs.file }}
+        path: appinventor-extensions/appinventor/components/build/extensions/${{ steps.build_aix.outputs.file }}

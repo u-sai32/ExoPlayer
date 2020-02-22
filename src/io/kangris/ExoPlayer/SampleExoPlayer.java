@@ -8,9 +8,9 @@ import android.os.Build;
 import android.os.Handler;
 import android.view.Surface;
 
-import com.google.android.exoplayer2.*;
-import com.google.android.exoplayer2.extractor.*;
-import com.google.android.exoplayer2.upstream.*;
+import com.google.android.exoplayer.*;
+import com.google.android.exoplayer.extractor.*;
+import com.google.android.exoplayer.upstream.*;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class SampleExoPlayer {

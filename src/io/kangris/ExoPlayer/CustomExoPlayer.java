@@ -53,7 +53,7 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     @SimpleFunction
     public void InitializePlayer(AndroidViewComponent container){
         AspectRatioFrameLayout videoFrame = (AspectRatioFrameLayout) container.getView();
-        SurfaceView surfaceView = new SurfaceView()
+        //SurfaceView surfaceView = new SurfaceView()
         surfaceView.getHolder().addCallback(this.activity);
         playerControlView = new PlayerControlView(this.activity);
         playerControlView.attach(this.activity);
@@ -62,7 +62,8 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     
 
     public View getView() {
-        return this.surfaceView;
+        //return this.surfaceView;
+      return this.view;
     }
     
     @SimpleFunction
@@ -77,7 +78,7 @@ public class CustomExoPlayer extends AndroidNonvisibleComponent implements Compo
     
     @SimpleFunction
     public boolean isShowingPlayerControl(){
-      playerControlView.isShowing()
+      return playerControlView.isShowing()
     }
     
     @SimpleFunction

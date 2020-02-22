@@ -8,9 +8,16 @@ import android.os.Build;
 import android.os.Handler;
 import android.view.Surface;
 
-import com.google.android.exoplayer.*;
-import com.google.android.exoplayer.extractor.*;
-import com.google.android.exoplayer.upstream.*;
+import com.google.android.exoplayer2.*;
+import com.google.android.exoplayer2.mediacodec.*;
+import com.google.android.exoplayer2.source.*;
+import com.google.android.exoplayer2.source.dash.*;
+import com.google.android.exoplayer2.source.hls.*;
+import com.google.android.exoplayer2.source.smoothstreaming.*;
+import com.google.android.exoplayer2.trackselection.*;
+import com.google.android.exoplayer2.ui.*;
+import com.google.android.exoplayer2.upstream.*;
+import com.google.android.exoplayer2.util.*;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class SampleExoPlayer {

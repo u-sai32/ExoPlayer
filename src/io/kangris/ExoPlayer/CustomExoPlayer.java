@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.github.ogapants.playercontrolview.PlayerControlView;
-import com.google.android.exoplayer.*;
-import com.google.android.exoplayer.util.*;
+import com.google.android.exoplayer2.*;
+import com.google.android.exoplayer2.util.*;
 
 import com.google.appinventor.components.annotations.*;
 import com.google.appinventor.components.annotations.UsesPermissions;
@@ -21,7 +21,7 @@ import com.google.appinventor.components.common.ComponentCategory;
 import com.google.appinventor.components.runtime.*;
 
 @DesignerComponent(category = ComponentCategory.EXTENSION, description = "CustomExoPlayer<br>by kangris", iconName = "images/extension.png", nonVisible = true, version = 1)
-@UsesLibraries(libraries = "exoplayer.jar, exoplayer.aar, playercontrolview.jar, playercontrolview.aar, exoplayer-core.jar, exoplayer-core.aar, exoplayer-dash.jar, exoplayer-dash, exoplayer-hls.jar, exoplayer-hls, exoplayer-smoothstreaming.jar, exoplayer-smoothstreaming.aar, exoplayer-ui.jar, exoplayer-ui.aar")
+@UsesLibraries(libraries = "exoplayer.jar, exoplayer.aar, playercontrolview.jar, playercontrolview.aar, exoplayer-core.jar, exoplayer-core.aar, exoplayer-dash.jar, exoplayer-dash.aar, exoplayer-hls.jar, exoplayer-hls.aar, exoplayer-smoothstreaming.jar, exoplayer-smoothstreaming.aar, exoplayer-ui.jar, exoplayer-ui.aar")
 @SimpleObject(external = true)
 public class CustomExoPlayer extends AndroidNonvisibleComponent implements Component{
     private static final String LOG_TAG = "ControlView";
